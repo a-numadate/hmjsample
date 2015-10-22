@@ -1,0 +1,29 @@
+// プラグインを適用
+apply plugin: 'java'    // Javaのコンパイル、テスト、そしてビルドできるようにする
+apply plugin: 'eclipse' // Eclipseプラグインを利用するための記述
+apply plugin: 'findbugs' // FindBugsを使用するための記述、Javaソースファイルの品質チェック用
+apply plugin: 'war' // WAR ファイルを生成用の記述
+apply plugin: 'project-report'
+
+// ライブラリをダウンロードするリポジトリを指定
+repositories {
+    mavenCentral()
+}
+// ここで指定したライブラリをリポジトリから自動でダウンロードしてくれる
+// なので毎回ライブラリをダウンロードして解凍、jarファイルを取り出してクラスパスに追加などはする必要がない
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+    testCompile 'junit:junit:4.12'
+    compile 'commons-dbcp:commons-dbcp:1.4'
+    compile 'com.google.inject:guice:3.0'
+}
+
+// war関係の設定を行う
+war {
+    archiveName = 'sample.war'
+}
+
+// チーム開発のための設定
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
