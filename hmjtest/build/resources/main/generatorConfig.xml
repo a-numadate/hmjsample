@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+ "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+ <!-- クラスパスの追加(JDBCのパス追加) -->
+ <classPathEntry location="C:\sts-bundle\postgresql-9.4-1204.jdbc4.jar" />
+
+ <context id="posgreTable" targetRuntime="MyBatis3">
+   <!-- DBの接続情報を設定 -->
+   <jdbcConnection driverClass="org.postgresql.Driver"
+       connectionURL="jdbc:postgresql://localhost/postgres"
+       userId="postgres"
+       password="Keyport01">
+   </jdbcConnection>
+
+   <!-- タイプ変換 -->
+   <!-- 数値型（Long, Integer, Short, etc.）をbigdecimalに変更するかの設定。 たぶん省略可能 -->
+   <javaTypeResolver >
+     <property name="forceBigDecimals" value="false" />
+   </javaTypeResolver>
+
+   <!-- Java Model(Entity)クラスの生成先を指定
+       targetPackage : 生成先パッケージ
+       targetProject : プロジェクトディレクトリから生成先パッケージの親ディレクトリまでのパス
+
+                詳細は公式リファレンス参照
+        http://mybatis.github.io/generator/configreference/javaModelGenerator.html
+   -->
+   <javaModelGenerator targetPackage="sample.model" targetProject="C:\Users\a-numadate\Documents\workspace-sts-3.7.1.RELEASE\hmjtest\src\main\java">
+     <property name="enableSubPackages" value="true" />
+     <property name="trimStrings" value="true" />
+   </javaModelGenerator>
+
+   <!-- SQL Mapperファイルの生成先を指定
+       targetPackage : 生成先パッケージ
+       targetProject : プロジェクトディレクトリから生成先パッケージの親ディレクトリまでのパス
+
+                詳細は公式リファレンス参照
+         http://mybatis.github.io/generator/configreference/sqlMapGenerator.html
+   -->
+   <sqlMapGenerator targetPackage="sample.mapper"  targetProject="C:\Users\a-numadate\Documents\workspace-sts-3.7.1.RELEASE\hmjtest\src\main\resources">
+     <property name="enableSubPackages" value="true" />
+   </sqlMapGenerator>
+
+   <!-- Java Clientクラスの生成先を指定     ※Java ClientはSQL Mapperファイルを呼び出すためのインターフェースクラスです。
+       targetPackage : 生成先パッケージ
+       targetProject : プロジェクトディレクトリから生成先パッケージの親ディレクトリまでのパス
+
+                詳細は公式リファレンス参照
+        http://mybatis.github.io/generator/configreference/javaClientGenerator.html
+
+       type :
+         type="ANNOTATEDMAPPER"
+                        アノテーションを定義したMapperインターフェースクラスとアノテーションの実装を定義したSqlProviderクラスを生成する。
+          Mapperファイルは生成しない。
+          Mapperファイルを使用せずにアノテーションでクエリを発行したい人向け
+
+         type="MIXEDMAPPER"
+                          アノテーションを定義したMapperインターフェースクラスとMapperファイルを生成する。
+           SqlProviderクラスは生成しない。
+           Mapperファイルとアノテーションでのクエリ発行を両立したい人向け。
+
+         type="XMLMAPPER"
+           MapperインターフェースクラスとMapperファイルのみ生成する。
+           SQLを全部Mapperファイルで管理したい人向け。
+   -->
+   <javaClientGenerator type="XMLMAPPER" targetPackage="sample.mapper"  targetProject="C:\Users\a-numadate\Documents\workspace-sts-3.7.1.RELEASE\hmjtest\src\main\java">
+     <property name="enableSubPackages" value="true" />
+   </javaClientGenerator>
+
+   <!--
+             自動生成対象のテーブル名を[tableName]に指定する。
+            ※テーブル名の指定はワイルドカードが利用できます
+
+            詳しい設定値については公式サイトのリファレンスを参照してください。
+      http://mybatis.github.io/generator/configreference/table.html
+
+     modelType :
+        modelType="flat"
+                       ドメインクラスのみ作成。
+        modelType="hierarchical"
+                       自動生成するMapperのパラメータの為にPrimary Keyエンティティを生成します。
+          MapperでPKを指定したクエリ(selectByPrimaryKey等)のパラメータがデフォルトでPrimary Keyエンティティになります。
+     -->
+<!--
+    <table schema="my" tableName="%"
+            enableInsert="true"
+            enableSelectByPrimaryKey="true"
+            enableSelectByExample="true"
+            enableUpdateByPrimaryKey="true"
+            enableUpdateByExample="false"
+            enableDeleteByPrimaryKey="true"
+            enableDeleteByExample="false"
+            enableCountByExample="false"
+            selectByExampleQueryId="false"
+            modelType="hierarchical">
+    </table>
+-->
+    <!-- 練習のため全テーブル指定は行わず作成対象のテーブルを追加していく -->
+    <table tableName="bulletin_board_data"/>
+
+ </context>
+</generatorConfiguration>
